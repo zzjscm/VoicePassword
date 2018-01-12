@@ -5,7 +5,9 @@ var innerAudioContext;
 var manager = wx.getRecorderManager();
 Page({
   data: {
-    userInfo: {},
+    userInfo: {}, 
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     voiceButtonName: '按住说话',
     voicePlayButtonName: '开始播放',
     voiceButtonDisable: false,
@@ -20,7 +22,11 @@ Page({
       text: '你说我猜',
       type: ''
     }],
-    currentChannelIndex: 0
+    navbarShowIndexArray: Array.from(Array(3).keys()),
+    currentChannelIndex: 0,
+    wordOfCommand: '',
+    balance: '15.00',
+    inputMoney: '',
   },
   bindViewTap: function () {
     wx.navigateTo({
@@ -28,51 +34,76 @@ Page({
     })
   },
   onLoad: function () {
-    console.log('onLoad' + JSON.stringify(this.data.userInfo))
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      console.log('onLoad' + JSON.stringify(userInfo))
-
-      //更新数据
-      that.setData({
-        userInfo: userInfo
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
       })
-    })
-    wx.checkSession({
-      success: function () {
-        //session 未过期，并且在本生命周期一直有效
-        console.log('登录未过期')
-      },
-      fail: function () {
-        //登录态过期
-        that.onLaunch();
-        wx.login() //重新登录
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
       }
-    })
-  },
-  onLaunch: function () {
-    wx.login({
-      success: function (res) {
-        console.log(JSON.stringify(res))
-        if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: '',
-            data: {
-              code: res.code
-            }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
           })
-        } else {
-          console.log('获取用户登录态失败！' + res.errMsg)
         }
-      },
-      fail: function (res) {
-        console.log('登录失败！' + res.errMsg)
-
-      }
-    });
+      })
+    }
+    console.log('onLoad' + JSON.stringify(this.data.userInfo))
+   
+    // wx.checkSession({
+    //   success: function () {
+    //     //session 未过期，并且在本生命周期一直有效
+    //     console.log('登录未过期')
+    //   },
+    //   fail: function () {
+    //     //登录态过期
+    //     that.onLaunch();
+    //     wx.login() //重新登录
+    //   }
+    // })
   },
+  getUserInfo: function (e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+  },
+  // onLaunch: function () {
+  //   wx.login({
+  //     success: function (res) {
+  //       console.log(JSON.stringify(res))
+  //       if (res.code) {
+  //         //发起网络请求
+  //         wx.request({
+  //           url: '',
+  //           data: {
+  //             code: res.code
+  //           }
+  //         })
+  //       } else {
+  //         console.log('获取用户登录态失败！' + res.errMsg)
+  //       }
+  //     },
+  //     fail: function (res) {
+  //       console.log('登录失败！' + res.errMsg)
+
+  //     }
+  //   });
+  // },
   tapVoicePlayButton: function (event) {
     var that = this
     var lastTime;
@@ -198,15 +229,6 @@ Page({
           // success
           console.log('begin:' + JSON.stringify(res));
           console.log(res.data);
-          // var json = JSON.parse(res.data);
-          // console.log(json.msg);
-          // var jsonMsg = JSON.parse(json.msg);
-          // console.log(jsonMsg.result);
-          // wx.hideToast()
-          // wx.navigateTo({
-          //   url: '../voicePage/voicePage?voiceData=' + jsonMsg.result.join('')
-          // })
-
           wx.request({
             url: 'http://192.168.9.119:8081/SamllServer/Mp3Test',
             data: {
@@ -215,19 +237,11 @@ Page({
             success: function (res) {
               // success
               console.log('request:' + JSON.stringify(res));
-              // console.log(res.data);
-              // var json = JSON.parse(res.data);
-              // console.log(json.msg);
-              // var jsonMsg = JSON.parse(json.msg);
-              // console.log(jsonMsg.result);
-              // wx.hideToast()
-              // wx.navigateTo({
-              //   url: '../voicePage/voicePage?voiceData=' + jsonMsg.result.join('')
-              // })
+       
             },
             fail: function (err) {
               // fail
-              console.log('请求error:' + err);
+              console.log('请求error:' + JSON.stringify(err));
             },
             complete: function () {
               console.log('请求complete');
@@ -237,7 +251,7 @@ Page({
         },
         fail: function (err) {
           // fail
-          console.log('上传error:' + err);
+          console.log('上传error:' + JSON.stringify(err));
         },
         complete: function () {
           console.log('上传complete');
@@ -309,19 +323,34 @@ Page({
     })
   },
   //切换顶部tab
-  onTapNavbar: function (targetChannelIndex) {
-    // this.getArticles(targetChannelIndex);
+  onTapNavbar: function (e) {
+    var id = e.currentTarget.id
+    id = id.substr(id.length - 1, 1)
+    this.switchChannel(parseInt(id));
+  },
+  switchChannel: function (targetChannelIndex) {
+    // this.getCurrentPage(targetChannelIndex);
+    // var currentChannelIndex = this.data.currentChannelIndex
+    // let targetChannelIndex = this.data.navbarShowIndexArray.indexOf(currentChannelIndex) ;
     let navbarArray = this.data.navbarArray;
-    console.log('targetChannelIndex:' +JSON.stringify(targetChannelIndex),navbarArray);
     navbarArray.forEach((item, index, array) => {
       item.type = '';
       if (index === targetChannelIndex) {
         item.type = 'navbar-item-active';
       }
     });
-    this.setData({
-      navbarArray: navbarArray,
-      currentChannelIndex: targetChannelIndex
-    });
+
+    if (this.data.currentChannelIndex !== targetChannelIndex) {
+      this.setData({
+        navbarArray: navbarArray,
+        currentChannelIndex: targetChannelIndex
+      });
+    }
+  },
+  changeBar: function (e) {
+    this.switchChannel(e.detail.current);
+  },
+  formSubmit:function(e){
+    console.log('sub:',e);
   }
 })

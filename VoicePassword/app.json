@@ -1,7 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/record/record",
+    "pages/cash/cash",
+    "pages/person/person"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -10,16 +13,30 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
+    "backgroundColor": "white",
+    "selectedColor": "orange",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "",
+        "text": "发红包",
         "iconPath": "/images/home_n.png",
         "selectedIconPath": "/images/home_s.png"
       },
       {
-        "pagePath": "pages/web/web",
-        "text": "web",
+        "pagePath": "pages/record/record",
+        "text": "记录",
+        "iconPath": "/images/loan_n.png",
+        "selectedIconPath": "/images/loan_s.png"
+      },
+       {
+        "pagePath": "pages/cash/cash",
+        "text": "余额提现",
+        "iconPath": "/images/home_n.png",
+        "selectedIconPath": "/images/home_s.png"
+      },
+      {
+        "pagePath": "pages/person/person",
+        "text": "我的",
         "iconPath": "/images/loan_n.png",
         "selectedIconPath": "/images/loan_s.png"
       }
