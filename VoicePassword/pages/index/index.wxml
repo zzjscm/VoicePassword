@@ -1,0 +1,36 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='top-bar'>
+
+    <view class="navbar-item {{ item.type }}" id="navbar-item{{index}}" wx:for="{{ navbarArray }}" catchtap="onTapNavbar">
+      <view class="navbar-item-wrap">
+        <view>{{ item.text }}</view>
+        <view class='line'></view>
+      </view>
+    </view>
+
+  </view>
+  <swiper bindchange=''>
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" style="width:100%" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view bindtap="bindViewTap" class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+  <view class="voice">
+    <button type="primary" hover-class="button-hover" disabled="{{voiceButtonDisable}}" class="button-record" bindtouchstart='touchStart' bindtouchend='touchEnd' bindtouchmove='touchMoveCancel'>{{voiceButtonName}}</button>
+
+    <!-- <button type="" hover-class="button-hover" class="button-voice" bindtap="tapVoicePlayButton">{{voicePlayButtonName}}</button> -->
+  </view>
+  <view class='result'>
+    <view>
+      <image class='result-head'></image>
+      <view hover-class="button-hover" class="button-play" bindtap="tapVoicePlayButton">{{voicePlayButtonName}}</view>
+    </view>
+  </view>
+</view>

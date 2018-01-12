@@ -1,0 +1,28 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f00",
+    "navigationBarTitleText": "你说啥",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "",
+        "iconPath": "/images/home_n.png",
+        "selectedIconPath": "/images/home_s.png"
+      },
+      {
+        "pagePath": "pages/web/web",
+        "text": "web",
+        "iconPath": "/images/loan_n.png",
+        "selectedIconPath": "/images/loan_s.png"
+      }
+    ]
+  }
+}
