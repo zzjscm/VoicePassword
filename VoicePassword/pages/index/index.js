@@ -48,7 +48,7 @@ Page({
           hasUserInfo: true
         })
       }
-    } else {
+    } else {      
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
@@ -59,9 +59,7 @@ Page({
           })
         }
       })
-    }
-    console.log('onLoad' + JSON.stringify(this.data.userInfo))
-   
+    }   
     // wx.checkSession({
     //   success: function () {
     //     //session 未过期，并且在本生命周期一直有效
@@ -75,7 +73,7 @@ Page({
     // })
   },
   getUserInfo: function (e) {
-    console.log(e)
+    console.log('getUserInfo:'+e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -352,5 +350,22 @@ Page({
   },
   formSubmit:function(e){
     console.log('sub:',e);
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: '新奇的口令玩法，快来体验吧 >>',
+      path: '/pages/index/index',
+      success: function (res) {
+        // 转发成功
+        wx.showToast({
+          title: '转发成功',
+          icon: 'success',
+          duration: 2000
+        })
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
   }
 })

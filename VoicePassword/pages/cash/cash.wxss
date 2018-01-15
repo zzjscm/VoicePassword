@@ -1,1 +1,83 @@
 /* pages/cash/cash.wxss */
+
+page {
+  height: 100%;
+}
+.container{
+  display: flex;
+  background-color: #eee;
+}
+
+.main{
+ display: flex;
+  flex-direction: column;
+  width: 85%;
+  margin: 0 auto;
+  height: auto;
+  margin-top: 30rpx;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  box-shadow: 0rpx 0rpx 10rpx 5rpx rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 25rpx;
+}
+
+.txt{
+  font-size: 24rpx;
+  margin-bottom: 30rpx;
+
+}
+
+.balance{
+  font-size: 34rpx;
+  color: grey;
+}
+
+.cash{
+  font-size: 36rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.cash input{
+  margin-top: -3rpx;
+}
+
+.line{
+  width: 100%;
+  height: 3rpx;
+  margin: 0 auto;
+  background-color: #ddd;
+  /* margin-top: -10rpx; */
+}
+
+.txt-tip{
+  font-size: 28rpx;
+  color: grey;
+  margin-top: 30rpx;
+}
+
+.charge-detail{
+  display: flex;
+  flex-direction: row;
+  margin-top: 30rpx;
+  font-size: 28rpx;
+}
+.money-tip{
+  color: #f00;
+}
+
+.withdraw-deposit{
+  width: 80%;
+  height:60rpx;
+  margin-top: 20rpx;
+  font-size: 36rpx;
+  line-height: 60rpx;
+}
+
+.time-tip{
+  color:#f00;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}

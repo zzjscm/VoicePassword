@@ -1,111 +1,117 @@
 <!--index.wxml-->
 <view class="container">
-  <view class='top-bar'>
+  <view class='topbar-bg'>
+    <view class='top-bar'>
 
-    <view class="navbar-item {{ item.type }}" id="navbar-item{{index}}" wx:for="{{ navbarArray }}" wx:key="type" catchtap="onTapNavbar">
-      <view class="navbar-item-wrap">
-        <view>{{ item.text }}</view>
-        <view class='line'></view>
+      <view class="navbar-item {{ item.type }}" id="navbar-item{{index}}" wx:for="{{ navbarArray }}" wx:key="type" catchtap="onTapNavbar">
+        <view class="navbar-item-wrap">
+          <view>{{ item.text }}</view>
+          <view class='line'></view>
+        </view>
       </view>
-    </view>
 
+    </view>
   </view>
   <swiper bindchange='changeBar' current='{{currentChannelIndex}}' circular="{{false}}">
     <!-- <block> -->
-      <swiper-item>
-        <view bindtap="bindViewTap" class="userinfo">
-          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-          <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
-        </view>
-        <view class='main'>
-<!-- 1 -->
-          <view class="voice">
-            <button hover-class="button-hover" disabled="{{voiceButtonDisable}}" class="button-record" bindtouchstart='touchStart' bindtouchend='touchEnd' bindtouchmove='touchMoveCancel' loading='{{false}}'>长按可语音输入口令</button>
+    <swiper-item>
+      <view class="userinfo">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
+      </view>
+      <view class='main'>
+        <!-- 1 -->
+        <view class="voice">
+          <button hover-class="button-hover" disabled="{{voiceButtonDisable}}" class="button-record" bindtouchstart='touchStart' bindtouchend='touchEnd' bindtouchmove='touchMoveCancel' loading='{{false}}'>
+            <image src='/images/microphone.png'></image>
+            长按可语音输入口令</button>
 
+        </view>
+        <form bindsubmit='formSubmit'>
+          <view class='word-set'>
+            <text>设置口令</text>
+            <input name='textSet' type='text' placeholder='我爱你' value='{{wordOfCommand}}'></input>
           </view>
-          <form bindsubmit='formSubmit'>
-            <view class='word-set'>
-              <text>设置口令</text>
-              <input name='textSet' type='text' placeholder='我爱你' value='{{wordOfCommand}}'></input>
-            </view>
-            <view class='guide-tip'>小伙伴们说对口令就能获得随机的打赏</view>
+          <view class='guide-tip'>小伙伴们说对口令就能获得随机的打赏</view>
 
-            <view class='word-set'>
-              <text>赏金（元）</text>
-              <input name='moneySet' type='digit' placeholder='填写金额' value='{{inputMoney}}'></input>
-            </view>
-            <view class='word-set'>
-              <text>数量（个）</text>
-              <input name='countSet' type='number' placeholder='填写数量' value='{{inputCount}}'></input>
-            </view>
-            <view class='cost-tip'>需支付￥0.00服务费，优先使用余额￥{{balance}}</view>
-            <button type='warn' class='btn-create' form-type='submit'>生成语音口令</button>
-          </form>
-         
-        </view>
-      </swiper-item>
-
-      <swiper-item>
-        <view bindtap="bindViewTap" class="userinfo">
-          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-          <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
-        </view>
-        <view class='main'>
-<!--2 -->
-          <view class="voice">
-            <button hover-class="button-hover" disabled="{{voiceButtonDisable}}" class="button-record" bindtouchstart='touchStart' bindtouchend='touchEnd' bindtouchmove='touchMoveCancel' loading='{{false}}'>长按录入你想对TA说的话</button>
-
+          <view class='word-set'>
+            <text>赏金（元）</text>
+            <input name='moneySet' type='digit' placeholder='填写金额' value='{{inputMoney}}'></input>
           </view>
-          <form bindsubmit='formSubmit'>
-            
-            <view class='guide-tip'>好友听完你说的话就能领取赏金</view>
-
-            <view class='word-set'>
-              <text>赏金（元）</text>
-              <input name='moneySet' type='digit' placeholder='填写金额' value='{{inputMoney}}'></input>
-            </view>
-            <view class='word-set'>
-              <text>数量（个）</text>
-              <input name='countSet' type='number' placeholder='填写数量' value='{{inputCount}}'></input>
-            </view>
-            <view class='cost-tip'>需支付￥0.00服务费，优先使用余额￥{{balance}}</view>
-            <button type='warn' class='btn-create' form-type='submit'>生成语音口令</button>
-          </form>
-         
-        </view>
-      </swiper-item>
-
-      <swiper-item>
-        <view bindtap="bindViewTap" class="userinfo">
-          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-          <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
-        </view>
-        <view class='main'>
-<!-- 3 -->
-          <view class="voice">
-            <button hover-class="button-hover" disabled="{{voiceButtonDisable}}" class="button-record" bindtouchstart='touchStart' bindtouchend='touchEnd' bindtouchmove='touchMoveCancel' loading='{{false}}'>长按录入你的语音问题</button>
-
+          <view class='word-set'>
+            <text>数量（个）</text>
+            <input name='countSet' type='number' placeholder='填写数量' value='{{inputCount}}'></input>
           </view>
-          <form bindsubmit='formSubmit'>
-            <view class='question-set'>  
-              <input name='textSet' type='text' placeholder='输入你的中文答案（不要标点符号）' value='{{wordOfCommand}}'></input>
-            </view>
-            <view class='guide-tip'>好友听完你的问题，说对答案就能领取赏金</view>
+          <view class='cost-tip'>需支付￥0.00服务费，优先使用余额￥{{balance}}</view>
+          <button type='warn' class='btn-create' form-type='submit'>生成语音口令</button>
+        </form>
 
-            <view class='word-set'>
-              <text>赏金（元）</text>
-              <input name='moneySet' type='digit' placeholder='填写金额' value='{{inputMoney}}'></input>
-            </view>
-            <view class='word-set'>
-              <text>数量（个）</text>
-              <input name='countSet' type='number' placeholder='填写数量' value='{{inputCount}}'></input>
-            </view>
-            <view class='cost-tip'>需支付￥0.00服务费，优先使用余额￥{{balance}}</view>
-            <button type='warn' class='btn-create' form-type='submit'>生成语音口令</button>
-          </form>
-         
+      </view>
+    </swiper-item>
+
+    <swiper-item>
+      <view class="userinfo">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
+      </view>
+      <view class='main'>
+        <!--2 -->
+        <view class="voice">
+          <button hover-class="button-hover" disabled="{{voiceButtonDisable}}" class="button-record" bindtouchstart='touchStart' bindtouchend='touchEnd' bindtouchmove='touchMoveCancel' loading='{{false}}'>
+            <image src='/images/microphone.png'></image>长按录入你想对TA说的话</button>
+
         </view>
-      </swiper-item>
+        <form bindsubmit='formSubmit'>
+
+          <view class='guide-tip'>好友听完你说的话就能领取赏金</view>
+
+          <view class='word-set'>
+            <text>赏金（元）</text>
+            <input name='moneySet' type='digit' placeholder='填写金额' value='{{inputMoney}}'></input>
+          </view>
+          <view class='word-set'>
+            <text>数量（个）</text>
+            <input name='countSet' type='number' placeholder='填写数量' value='{{inputCount}}'></input>
+          </view>
+          <view class='cost-tip'>需支付￥0.00服务费，优先使用余额￥{{balance}}</view>
+          <button type='warn' class='btn-create' form-type='submit'>生成语音口令</button>
+        </form>
+
+      </view>
+    </swiper-item>
+
+    <swiper-item>
+      <view class="userinfo">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
+      </view>
+      <view class='main'>
+        <!-- 3 -->
+        <view class="voice">
+          <button hover-class="button-hover" disabled="{{voiceButtonDisable}}" class="button-record" bindtouchstart='touchStart' bindtouchend='touchEnd' bindtouchmove='touchMoveCancel' loading='{{false}}'>
+            <image src='/images/microphone.png'></image>长按录入你的语音问题</button>
+
+        </view>
+        <form bindsubmit='formSubmit'>
+          <view class='question-set'>
+            <input name='textSet' type='text' placeholder='输入你的中文答案（不要标点符号）' value='{{wordOfCommand}}'></input>
+          </view>
+          <view class='guide-tip'>好友听完你的问题，说对答案就能领取赏金</view>
+
+          <view class='word-set'>
+            <text>赏金（元）</text>
+            <input name='moneySet' type='digit' placeholder='填写金额' value='{{inputMoney}}'></input>
+          </view>
+          <view class='word-set'>
+            <text>数量（个）</text>
+            <input name='countSet' type='number' placeholder='填写数量' value='{{inputCount}}'></input>
+          </view>
+          <view class='cost-tip'>需支付￥0.00服务费，优先使用余额￥{{balance}}</view>
+          <button type='warn' class='btn-create' form-type='submit'>生成语音口令</button>
+        </form>
+
+      </view>
+    </swiper-item>
     <!-- </block> -->
   </swiper>
 

@@ -4,7 +4,10 @@
     "pages/logs/logs",
     "pages/record/record",
     "pages/cash/cash",
-    "pages/person/person"
+    "pages/person/person",
+    "pages/problem/problem",
+    "pages/myAudio/myAudio",
+    "pages/paymentDetail/paymentDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -14,7 +17,7 @@
   },
   "tabBar": {
     "backgroundColor": "white",
-    "selectedColor": "orange",
+    "selectedColor": "#FFBD85",
     "list": [
       {
         "pagePath": "pages/index/index",
@@ -28,7 +31,7 @@
         "iconPath": "/images/loan_n.png",
         "selectedIconPath": "/images/loan_s.png"
       },
-       {
+      {
         "pagePath": "pages/cash/cash",
         "text": "余额提现",
         "iconPath": "/images/home_n.png",

@@ -1,2 +1,16 @@
 <!--pages/cash/cash.wxml-->
-<text>pages/cash/cash.wxml</text>
+<view class='container'>
+  <view class='main'>
+    <view class='txt'>账户余额　　<text class='balance'>{{balance}}</text> 元</view>
+    <view class='txt'>提现金额</view>
+    <view class='cash'>￥<input id='cash'></input></view>
+    <view class='line'></view>
+    <view class='txt-tip'>提现到微信钱包，全部提现</view>
+    <view class='charge-detail'>手续费：<view class='money-tip'>{{serviceCharge}}</view>元，到账金额：<view class='money-tip'>{{arrivalAmount}}</view>元</view>
+    <button type='primary' class='withdraw-deposit'>提现</button>
+    <view class='time-tip'>1-2个工作日到账</view>
+  </view>
+
+
+
+</view>

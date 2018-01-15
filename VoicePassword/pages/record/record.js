@@ -56,7 +56,7 @@ Page({
         }
       })
     }
-    console.log('onLoad' + JSON.stringify(this.data.userInfo))
+    // console.log('onLoad' + JSON.stringify(this.data.userInfo))
 
   },
   getUserInfo: function (e) {
@@ -112,8 +112,22 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function (res) {
+    return {
+      title: '新奇的口令玩法，快来体验吧 >>',
+      path: '/pages/index/index',
+      success: function (res) {
+        // 转发成功
+        wx.showToast({
+          title: '转发成功',
+          icon: 'success',
+          duration: 2000
+        })
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
   },
   //切换顶部tab
   onTapNavbar: function (e) {
