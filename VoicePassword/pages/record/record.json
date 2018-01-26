@@ -1,6 +1,3 @@
 {
-  "backgroundTextStyle": "light",
-  "navigationBarBackgroundColor": "#f00",
-  "navigationBarTitleText": "红包记录",
-  "navigationBarTextStyle": "white"
+  "navigationBarTitleText": "红包记录"
 }

@@ -27,13 +27,13 @@
 .navbar-item-active{
   font-size: 26rpx;
   font-weight: bold;
-  color: red;
+  color: #E4694A;
 }
 .navbar-item-active .line {
   width: 70%;
   height: 5rpx;
   margin: 0 auto;
-  background-color: red;
+  background-color: #E4694A;
   margin-top: 10rpx;
 }
 

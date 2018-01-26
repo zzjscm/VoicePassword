@@ -1,0 +1,55 @@
+<!--pages/recordDetail/recordDetail.wxml-->
+<view class='container'>
+  <view class='top'>
+    <view class="userinfo">
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </view>
+    <view class='record-text'>
+      <image src='/images/word-ioc.png'></image>
+      {{recordText}}
+    </view>
+    <button class='btn-receive {{ isBroghtOut ?  "btn-off"  : "btn-on" }}'>{{receiveButton}}</button>
+    <view class='center-bar'>
+      <view class='for-cash'>
+        <image src='/images/withdraw-deposit-ico.png'></image>
+        去提现
+      </view>
+      <view class='one-more' bindtap='sendOneMore'>
+        <image src='/images/word-ioc.png'></image>
+        再发一个
+      </view>
+      <view class='for-transmit'>
+        <image src='/images/transpond-ico.png'></image>
+        去转发
+      </view>
+    </view>
+  </view>
+  <view class='bottom'>
+    <view class='bottom-summary'>
+      <view class='summary'>共{{totalMoney}}元，已领取{{currentCounts}}/{{allCounts}}个</view>
+      <view class='complain'>投诉</view>
+    </view>
+    <view wx:for="{{getList}}" wx:key="{{}}" class='success-list' id='success-item{{index}}'>
+      <!--头像-->
+      <view class='item-head'>
+        <image src='{{item.avatarUrl}}'></image>
+      </view>
+      <!-- 昵称 性别 语音 -->
+      <view class='item-center'>
+        <view class='item-center-top'>
+          <view class='item-nickname'>{{item.nickName}}</view>
+          <image src='{{item.gender==1?"/images/male.png":"/images/female.png"}}'></image>
+        </view>
+        <button class='item-audio'>{{item.duration}}"</button>
+      </view>
+      <!--money time  -->
+      <view class='item-end'>
+        <view class='item-money'>{{item.money}}元</view>
+        <view class='item-time'>{{item.time}}</view>
+      </view>
+
+    </view>
+    <view class='bottom-line'></view>
+  </view>
+</view>

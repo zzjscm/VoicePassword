@@ -7,11 +7,12 @@
     "pages/person/person",
     "pages/problem/problem",
     "pages/myAudio/myAudio",
-    "pages/paymentDetail/paymentDetail"
+    "pages/paymentDetail/paymentDetail",
+    "pages/recordDetail/recordDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#f00",
+    "navigationBarBackgroundColor": "#E4694A",
     "navigationBarTitleText": "你说啥",
     "navigationBarTextStyle": "white"
   },

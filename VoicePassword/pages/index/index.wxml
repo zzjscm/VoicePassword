@@ -17,7 +17,6 @@
     <swiper-item>
       <view class="userinfo">
         <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-        <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
       </view>
       <view class='main'>
         <!-- 1 -->
@@ -52,7 +51,6 @@
     <swiper-item>
       <view class="userinfo">
         <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-        <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
       </view>
       <view class='main'>
         <!--2 -->
@@ -83,7 +81,6 @@
     <swiper-item>
       <view class="userinfo">
         <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-        <!-- <text class="userinfo-nickname">{{userInfo.nickName}}</text> -->
       </view>
       <view class='main'>
         <!-- 3 -->

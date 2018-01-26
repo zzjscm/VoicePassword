@@ -22,7 +22,14 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "recordDetail",
+					"pathName": "pages/recordDetail/recordDetail",
+					"query": "redKey=12345"
+				}
+			]
 		}
 	}
 }
